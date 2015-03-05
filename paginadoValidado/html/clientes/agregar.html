@@ -1,0 +1,14 @@
+<form id="alta_cliente" action="/<?php echo VIDEOCENTRO.Cliente_Controller::$MODULO.CREATE;?>/" method="POST">
+		<div class="item_requerid">Nombre</div>
+		<div class="form_requerid"><input type="text" name="nombre" id="nombre"><span class="validation_message"></span></div>
+		<div class="item_requerid">Direcci&oacute;n</div>
+		<div class="form_requerid"><input type="text" name="direccion" id="direccion"><span class="validation_message"></span></div>
+		<div class="item_requerid">Tel&eacute;fono</div>
+		<div class="form_requerid"><input type="text" name="telefono" id="telefono"><span class="validation_message"></span></div>
+		<div class="item_requerid">E-mail</div>
+		<div class="form_requerid"><input type="text" name="email" id="email"><span class="validation_message"></span></div>
+		<div class="item_requerid">C&oacute;digo Postal</div>
+		<div class="form_requerid"><input type="text" name="cp" id="cp" maxlength="5"><span class="validation_message"></span></div>
+		
+		<div class="form_button"><input type="submit" name="enviar" id="enviar" value="Agregar"><span class="validation_message"></span></div>
+</form>

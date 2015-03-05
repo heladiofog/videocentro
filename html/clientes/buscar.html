@@ -1,0 +1,12 @@
+<form id="buscar_cliente" action="/<?php echo VIDEOCENTRO.Cliente_Controller::$MODULO.READ;?>/" method="GET">
+	<div class="item_requerid">Nombre</div>
+	<div class="form_requerid"><input type="text" name="nombre" id="nombre"></div>
+	<div class="item_requerid">E-mail</div>
+	<div class="form_requerid"><input type="text" name="email" id="email"></div>
+	<div class="item_requerid">C&oacute;digo Postal</div>
+	<div class="form_requerid"><input type="text" name="cp" id="cp"></div>
+	
+	<div class="form_button">
+		<input type="submit" id="btn_enviar" value="Buscar">
+	</div>
+</form>

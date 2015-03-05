@@ -1,0 +1,29 @@
+<form id="detalle_cliente" action="/<?php echo VIDEOCENTRO.Cliente_Controller::$MODULO.UPDATE;?>/" method="POST">
+	<?php if(array_key_exists('cliente', $data) && !empty($data['cliente'])) : 
+		$cli = $data['cliente'];
+	?>
+		
+		<div class="item_requerid">Nombre</div>
+		<div class="form_requerid">
+			<input type="text" name="nombre" id="nombre" value="<?php echo $cli->get_nombreVc(); ?>" readonly />
+		</div>
+		<div class="item_requerid">Direcci&oacute;n</div>
+		<div class="form_requerid">
+			<input type="text" name="direccion" id="direccion" value="<?php echo $cli->get_direccionVc(); ?>" readonly />
+		</div>
+		<div class="item_requerid">E-mail</div>
+		<div class="form_requerid">
+			<input type="text" name="email" id="email" value="<?php echo $cli->get_emailVc(); ?>" readonly />
+		</div>
+		<div class="item_requerid">C&oacute;digo Postal</div>
+		<div class="form_requerid">
+			<input type="text" name="cp" id="cp" value="<?php echo $cli->get_cpCh(); ?>" readonly />
+		</div>
+		<div class="item_requerid">Fecha de Registro</div>
+		<div class="form_requerid">
+			<input type="text" name="fechaRegistro" id="fechaRegistro" value="<?php echo $cli->get_fechaRegistroDt(); ?>" readonly />
+		</div>
+	<?php endif;?>
+		<!--div class="form_button"><input type="submit" name="enviar" id="enviar" value="EDITAR"></div-->
+		<div class="form_button"></div>
+</form>

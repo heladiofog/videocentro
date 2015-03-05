@@ -1,0 +1,41 @@
+<form id="detalle_pelicula" action="/<?php echo VIDEOCENTRO.Pelicula_Controller::$MODULO.UPDATE;?>/" method="POST">
+	<?php if(array_key_exists('pelicula', $data) && !empty($data['pelicula'])) : 
+		$p = $data['pelicula'];
+	?>
+		
+		<div class="item_requerid">Titulo</div>
+		<div class="form_requerid">
+			<input type="text" name="titulo" id="titulo" value="<?php echo $p->get_tituloVc(); ?>" readonly />
+		</div>
+		<div class="item_requerid">G&eacute;nero</div>
+		<div class="form_requerid">
+			<input type="text" name="genero" id="genero" value="<?php echo $p->get_generoVc(); ?>" readonly />
+		</div>
+		<div class="item_requerid">A&ntilde;o</div>
+		<div class="form_requerid">
+			<input type="text" name="anio" id="anio" value="<?php echo $p->get_anioSi(); ?>" readonly />
+		</div>
+		<div class="item_requerid">Clasificacion</div>
+		<div class="form_requerid">
+			<input type="text" name="clasificacion" id="clasificacion" value="<?php echo $p->get_clasificacionVc(); ?>" readonly />
+		</div>
+		<div class="item_requerid">Director</div>
+		<div class="form_requerid">
+			<input type="text" name="director" id="director" value="<?php echo $p->get_directorVc(); ?>" readonly />
+		</div>
+		<div class="item_requerid">Existencia</div>
+		<div class="form_requerid">
+			<input type="text" name="existencia" id="existencia" value="<?php echo $p->get_existenciaIn(); ?>" readonly />
+		</div>
+		<div class="item_requerid">C&oacute;odigo de Renta</div>
+		<div class="form_requerid">
+			<input type="text" name="codigoRenta" id="codigoRenta" value="<?php echo $p->get_codigoRentaCh(); ?>" readonly />
+		</div>
+		<div class="item_requerid">Disponibles</div>
+		<div class="form_requerid">
+			<input type="text" name="disponible" id="disponible" value="<?php echo $p->get_disponibleSi(); ?>" readonly />
+		</div>
+	<?php endif;?>
+		<!--div class="form_button"><input type="submit" name="enviar" id="enviar" value="EDITAR"></div-->
+		<div class="form_button"></div>
+</form>

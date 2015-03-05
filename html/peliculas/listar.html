@@ -1,0 +1,112 @@
+<form id="lista_peliculas" action="/<?php echo VIDEOCENTRO.Pelicula_Controller::$MODULO.DETAIL;?>/" method="GET">
+	<div id="list_headers">
+		<div class="column_header">T&iacute;tulo</div>
+		<div class="column_header">Director</div>
+		<div class="column_header">G&eacute;nero</div>
+		<div class="column_header">A&ntilde;o</div>
+	</div>
+	<div id="list_results">
+		
+			<?php
+			if(array_key_exists('peliculas', $data) && count($data['peliculas']) > 0) {
+				$peliculas = $data['peliculas'];
+				foreach($peliculas as $pelicula) {
+			?>
+		<ul>
+			<li><?php echo $pelicula['tituloVc']; ?></li> 
+			<li><?php echo $pelicula['directorVc']; ?> </li>
+			<li><?php echo $pelicula['generoVc']; ?> </li>
+			<li><?php echo $pelicula['anioSi']; ?> </li>
+			<li><a href="/videocentro/peliculas/detail/?id=<?php echo $pelicula['id_peliculaIn']; ?>" title="editar"><?php echo VIEW_DETAIL ?></a></li>
+		</ul>
+			<?php 
+					
+				}
+				//echo " ", count($peliculas);
+				//print_r ($peliculas);
+			} else {
+			?>
+			<ul>
+				<li> -- </li> 
+				<li> -- </li>
+				<li> -- </li>
+				<li> -- </li>
+				<li> -- </li>
+			</ul>
+			<?php 
+			}
+			?>
+		
+		<div class="form_button">
+		<?php
+			//se muestra siempre y cuando haya más de una página
+			if(	(array_key_exists('pagina', $data) && ($pagina = $data['pagina']) > 0 ) &&
+					(array_key_exists('ultima_pagina', $data) && ($ultima_pagina = $data['ultima_pagina']) > 0) &&
+					$ultima_pagina > 1 ) {
+				 $nextpage = $pagina + 1;
+				 $prevpage = $pagina - 1;
+		?>		
+			
+			<ul id="pagination-digg">
+			<?php
+			//si es pa página 1,deshabilitar @Anterior@, se muestra el 1 
+				if ($pagina == 1) {
+			?>
+						<li class="previous-off">&laquo; Anterior</li>
+						<li class="active">1</li> 
+						<?php 
+							for($i= $pagina + 1; $i <= $ultima_pagina ; $i++) {
+						?>
+								<li class="inactive">
+									<a href="/videocentro/peliculas/listar/?pagina=<?php echo $i; ?>"><?php echo $i; ?></a>
+								</li>
+			<?php 	}
+						 //si la última páginaes mayor que la actual, se muestra el @Siguiente@, si no, se deshabilita
+							if($ultima_pagina > $pagina ) {
+			?>		
+								<li class="next">
+									<a href="/videocentro/peliculas/listar/?pagina=<?php echo $nextpage; ?>" >Siguiente &raquo;</a>
+								</li>
+			<?php
+						} else { 	//deshabilitar el botón @Siguiente@
+			?>
+							<li class="next-off">Siguiente &raquo;</li>
+			<?php		
+						}
+				} else {	//si no es la primer página, se habilita el @Anterior@ 
+			?>
+					<li class="previous">
+						<a href="/videocentro/peliculas/listar/?pagina=<?php echo $prevpage; ?>" >&laquo; Anterior</a>
+					</li>
+				<?php
+						for($i= 1; $i <= $ultima_pagina ; $i++) {
+							//comprobar si es página activa
+							if($pagina == $i) {
+				?>	
+								<li class="active"><?php echo $i; ?></li>
+				<?php
+							} else {	//si no es activa, se habilita para la paginación
+				?>	
+								<li class="inactive">
+									<a href="/videocentro/peliculas/listar/?pagina=<?php echo $i; ?>" ><?php echo $i;?></a>
+								</li>
+				<?php
+							}
+						}	
+						//si no es la última página, se habilita el @Siguiente@
+						if($ultima_pagina >$pagina ) {	
+				?>	
+							<li class="next"><a href="/videocentro/peliculas/listar/?pagina=<?php echo $nextpage;?>">Siguiente &raquo;</a></li>
+			<?php
+						}	else {
+			?> 			
+							<li class="next-off">Siguiente &raquo;</li>
+		<?php
+						}
+				}
+			}
+		?>
+			</ul>
+		</div>
+	</div>
+</form>

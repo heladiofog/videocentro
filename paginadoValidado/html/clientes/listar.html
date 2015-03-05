@@ -1,0 +1,110 @@
+<form id="lista_clientes" action="/<?php echo VIDEOCENTRO.Cliente_Controller::$MODULO.DETAIL;?>/" method="GET">
+	<div id="list_headers">
+		<div class="column_header">Nombre</div>
+		<div class="column_header">Direcci&oacute;n</div>
+		<div class="column_header">E-mail</div>
+		<div class="column_header">Fecha de Registro</div>
+	</div>
+	<div id="list_results">		
+			<?php
+			if(array_key_exists('clientes', $data) && count($data['clientes']) > 0) {
+				$clientes = $data['clientes'];
+				foreach($clientes as $cliente) {
+			?>
+		<ul>
+			<li><?php echo $cliente['nombreVc']; ?></li> 
+			<li><?php echo $cliente['direccionVc']; ?> </li>
+			<li><?php echo $cliente['emailVc']; ?> </li>
+			<li><?php echo $cliente['fechaRegistroDt']; ?> </li>
+			<li><a href="/videocentro/clientes/detail/?email=<?php echo $cliente['emailVc']; ?>" title="editar">editar</a></li>
+		</ul>
+			<?php 
+					
+				}
+				//echo " ", count($clientes);
+				//print_r ($clientes);
+			} else {
+			?>
+			<ul>
+				<li> -- </li> 
+				<li> -- </li>
+				<li> -- </li>
+				<li> -- </li>
+				<li> -- </li>
+			</ul>
+			<?php 
+			}
+			?>
+		<div class="form_button">
+		<?php
+			//se muestra siempre y cuando haya más de una página
+			if((array_key_exists('pagina', $data) && ($pagina = $data['pagina']) > 0 ) &&
+					(array_key_exists('ultima_pagina', $data) && ($ultima_pagina = $data['ultima_pagina']) > 0) &&
+					$ultima_pagina > 1 ) {
+				 $nextpage = $pagina + 1;
+				 $prevpage = $pagina - 1;
+		?>		
+			
+			<ul id="pagination-digg">
+			<?php
+			//si es pa página 1,deshabilitar @Anterior@, se muestra el 1 
+				if ($pagina == 1) {
+			?>
+						<li class="previous-off">&laquo; Anterior</li>
+						<li class="active">1</li> 
+						<?php 
+							for($i= $pagina + 1; $i <= $ultima_pagina ; $i++) {
+						?>
+								<li class="inactive">
+									<a href="/videocentro/clientes/listar/?pagina=<?php echo $i; ?>"><?php echo $i; ?></a>
+								</li>
+			<?php 	}
+						 //si la última páginaes mayor que la actual, se muestra el @Siguiente@, si no, se deshabilita
+							if($ultima_pagina > $pagina ) {
+			?>		
+								<li class="next">
+									<a href="/videocentro/clientes/listar/?pagina=<?php echo $nextpage; ?>" >Siguiente &raquo;</a>
+								</li>
+			<?php
+						} else { 	//deshabilitar el botón @Siguiente@
+			?>
+							<li class="next-off">Siguiente &raquo;</li>
+			<?php		
+						}
+				} else {	//si no es la primer página, se habilita el @Anterior@ 
+			?>
+					<li class="previous">
+						<a href="/videocentro/clientes/listar/?pagina=<?php echo $prevpage; ?>" >&laquo; Anterior</a>
+					</li>
+				<?php
+						for($i= 1; $i <= $ultima_pagina ; $i++) {
+							//comprobar si es página activa
+							if($pagina == $i) {
+				?>	
+								<li class="active"><?php echo $i; ?></li>
+				<?php
+							} else {	//si no es activa, se habilita para la paginación
+				?>	
+								<li class="inactive">
+									<a href="/videocentro/clientes/listar/?pagina=<?php echo $i; ?>" ><?php echo $i;?></a>
+								</li>
+				<?php
+							}
+						}	
+						//si no es la última página, se habilita el @Siguiente@
+						if($ultima_pagina >$pagina ) {	
+				?>	
+							<li class="next"><a href="/videocentro/clientes/listar/?pagina=<?php echo $nextpage;?>">Siguiente &raquo;</a></li>
+			<?php
+						}	else {
+			?> 			
+							<li class="next-off">Siguiente &raquo;</li>
+		<?php
+						}
+				}
+			}
+		?>
+			</ul>
+		</div>
+	</div>
+</form>
